@@ -94,7 +94,7 @@ public class Registeration extends AppCompatActivity {
     String Localaddress;
     String confirmpass;
     String mobileno;
-    String role = "Customer";
+    String role = "Retailer";
     CountryCodePicker Cpp;
     ProgressDialog mDialog;
 
@@ -284,8 +284,8 @@ public class Registeration extends AppCompatActivity {
             });
 
 
-            //TODO change the name of the reference from Retailer
-            databaseReference = firebaseDatabase.getInstance().getReference("Customer");
+            //TODO change the name of the reference from Retailer DONE
+            databaseReference = firebaseDatabase.getInstance().getReference("Retailer");
             FAuth = FirebaseAuth.getInstance();
 
             Signin.setOnClickListener(new View.OnClickListener() {
@@ -327,8 +327,8 @@ public class Registeration extends AppCompatActivity {
                                             hashMappp.put("State", statee);
                                             hashMappp.put("Suburban", suburban);
 
-                                            //TODO change the reference name to Retailer
-                                            firebaseDatabase.getInstance().getReference("Customer")
+                                            //TODO change the reference name to Retailer DONE
+                                            firebaseDatabase.getInstance().getReference("Retailer")
                                                     .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                     .setValue(hashMappp).addOnCompleteListener(new OnCompleteListener<Void>() {
 
@@ -341,7 +341,7 @@ public class Registeration extends AppCompatActivity {
                                                             if (task.isSuccessful()) {
                                                                 mDialog.dismiss();
                                                                 AlertDialog.Builder builder = new AlertDialog.Builder(Registeration.this);
-                                                                builder.setMessage("Registered Successfully,Please Verify your Email");
+                                                                builder.setMessage("Registered Successfully, Please Verify your Email");
                                                                 builder.setCancelable(false);
                                                                 builder.setPositiveButton("OK", new DialogInterface.OnClickListener() {
                                                                     @Override

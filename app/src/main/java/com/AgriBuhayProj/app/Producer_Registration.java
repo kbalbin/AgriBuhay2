@@ -92,7 +92,7 @@ public class Producer_Registration extends AppCompatActivity {
     String house;
     String Area;
     String Postcode;
-    String role = "Chef";
+    String role = "Producer";
     String statee;
     String cityy;
     String suburban;
@@ -101,7 +101,7 @@ public class Producer_Registration extends AppCompatActivity {
     @Override
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
-        setContentView(R.layout.activity_chef_registeration);
+        setContentView(R.layout.activity_producer_registeration);
 
         Toolbar toolbar = findViewById(R.id.toolbar);
         setSupportActionBar(toolbar);
@@ -280,7 +280,7 @@ public class Producer_Registration extends AppCompatActivity {
         });
 
         //This line will create a database to the firebase
-        databaseReference = firebaseDatabase.getInstance().getReference("Chef");
+        databaseReference = firebaseDatabase.getInstance().getReference("Producer");
         FAuth = FirebaseAuth.getInstance();
 
 
@@ -333,7 +333,7 @@ public class Producer_Registration extends AppCompatActivity {
                                         hashMappp.put("Postcode", Postcode);
                                         hashMappp.put("State", statee);
                                         hashMappp.put("Suburban", suburban);
-                                        firebaseDatabase.getInstance().getReference("Chef")
+                                        firebaseDatabase.getInstance().getReference("Producer")
                                                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid())
                                                 .setValue(hashMappp).addOnCompleteListener(new OnCompleteListener<Void>() {
 
@@ -355,7 +355,7 @@ public class Producer_Registration extends AppCompatActivity {
                                                                     dialog.dismiss();
 
                                                                     String phonenumber = Cpp.getSelectedCountryCodeWithPlus() + mobile; //Error
-                                                                    Intent b = new Intent(Producer_Registration.this, ChefVerifyPhone.class);
+                                                                    Intent b = new Intent(Producer_Registration.this, ProducerVerifyPhone.class);
                                                                     b.putExtra("phonenumber", phonenumber);
                                                                     startActivity(b);
 
@@ -395,7 +395,7 @@ public class Producer_Registration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent i = new Intent(Producer_Registration.this, ChefLogin.class);
+                Intent i = new Intent(Producer_Registration.this, ProducerLogin.class);
                 startActivity(i);
                 finish();
             }
@@ -405,7 +405,7 @@ public class Producer_Registration extends AppCompatActivity {
             @Override
             public void onClick(View v) {
 
-                Intent e = new Intent(Producer_Registration.this, Chefloginphone.class);
+                Intent e = new Intent(Producer_Registration.this, Producerloginphone.class);
                 startActivity(e);
                 finish();
             }

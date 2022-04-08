@@ -8,14 +8,12 @@ import android.animation.Animator;
 import android.animation.AnimatorListenerAdapter;
 import android.content.DialogInterface;
 import android.content.Intent;
-import android.graphics.drawable.Animatable;
 import android.os.Bundle;
 import android.os.Handler;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.AgriBuhayProj.app.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
@@ -59,19 +57,19 @@ public class MainActivity extends AppCompatActivity {
                             @Override
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 String role = dataSnapshot.getValue(String.class);
-                                //Todo database name role path Customer, Chef, DeliveryPerson
-                                if (role.equals("Customer")) {
-                                    Intent n = new Intent(MainActivity.this, CustomerFoodPanel_BottomNavigation.class);
+                                //Todo database name role path Customer, Chef, DeliveryPerson DONE
+                                if (role.equals("Retailer")) {
+                                    Intent n = new Intent(MainActivity.this, RetailerProductPanel_BottomNavigation.class);
                                     startActivity(n);
                                     finish();
                                 }
-                                if (role.equals("Chef")) {
-                                    Intent a = new Intent(MainActivity.this, ChefFoodPanel_BottomNavigation.class);
+                                if (role.equals("Producer")) {
+                                    Intent a = new Intent(MainActivity.this, ProducerProductPanel_BottomNavigation.class);
                                     startActivity(a);
                                     finish();
                                 }
-                                if (role.equals("DeliveryPerson")) {
-                                    Intent intent = new Intent(MainActivity.this, Delivery_FoodPanelBottomNavigation.class);
+                                if (role.equals("LogisticsPerson")) {
+                                    Intent intent = new Intent(MainActivity.this, Logistics_ProductPanelBottomNavigation.class);
                                     startActivity(intent);
                                     finish();
                                 }

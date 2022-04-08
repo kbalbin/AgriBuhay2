@@ -13,7 +13,6 @@ import android.widget.Button;
 import android.widget.TextView;
 import android.widget.Toast;
 
-import com.AgriBuhayProj.app.R;
 import com.AgriBuhayProj.app.ReusableCode.ReusableCodeForAll;
 import com.google.android.gms.tasks.OnCompleteListener;
 import com.google.android.gms.tasks.Task;
@@ -73,7 +72,7 @@ public class Login extends AppCompatActivity {
                                     mDialog.dismiss();
                                     if (FAuth.getCurrentUser().isEmailVerified()) {
                                         Toast.makeText(Login.this, "You are logged in", Toast.LENGTH_SHORT).show();
-                                        Intent z = new Intent(Login.this, CustomerFoodPanel_BottomNavigation.class);
+                                        Intent z = new Intent(Login.this, RetailerProductPanel_BottomNavigation.class);
                                         startActivity(z);
                                         finish();
                                     } else {

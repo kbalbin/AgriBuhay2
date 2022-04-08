@@ -62,7 +62,7 @@
 
 
         <Button
-            android:id="@+id/chef"
+            android:id="@+id/producer"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"
@@ -73,7 +73,7 @@
             />
 
         <Button
-            android:id="@+id/customer"
+            android:id="@+id/retailer"
             android:layout_width="200dp"
             android:layout_height="wrap_content"
             android:layout_gravity="center"

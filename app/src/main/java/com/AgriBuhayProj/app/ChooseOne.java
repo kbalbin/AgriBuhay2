@@ -4,14 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.constraintlayout.widget.ConstraintLayout;
 
 import android.content.Intent;
-import android.graphics.drawable.AnimationDrawable;
 import android.os.Bundle;
 import android.view.View;
 import android.widget.Button;
 
 public class ChooseOne extends AppCompatActivity {
 
-    Button Chef, Customer, DeliveryPerson;
+    Button Producer, Retailer, LogisticsPerson;
     Intent intent;
     String type;
     ConstraintLayout bgimage;
@@ -20,23 +19,23 @@ public class ChooseOne extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_choose_one);
-        Chef = (Button) findViewById(R.id.chef);
-        DeliveryPerson = (Button) findViewById(R.id.delivery);
-        Customer = (Button) findViewById(R.id.customer);
+        Producer = (Button) findViewById(R.id.producer);
+        LogisticsPerson = (Button) findViewById(R.id.delivery);
+        Retailer = (Button) findViewById(R.id.retailer);
         intent = getIntent();
         type = intent.getStringExtra("Home").toString().trim();
 
         //TODO Find something that can replace with this line of code
-        Chef.setOnClickListener(new View.OnClickListener() {
+        Producer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (type.equals("Email")) {
-                    Intent loginemail = new Intent(ChooseOne.this, ChefLogin.class);
+                    Intent loginemail = new Intent(ChooseOne.this, ProducerLogin.class);
                     startActivity(loginemail);
                     finish();
                 }
                 if (type.equals("Phone")) {
-                    Intent loginphone = new Intent(ChooseOne.this, Chefloginphone.class);
+                    Intent loginphone = new Intent(ChooseOne.this, Producerloginphone.class);
                     startActivity(loginphone);
                     finish();
                 }
@@ -50,7 +49,7 @@ public class ChooseOne extends AppCompatActivity {
             }
         });
 
-        Customer.setOnClickListener(new View.OnClickListener() {
+        Retailer.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (type.equals("Email")) {
@@ -70,20 +69,20 @@ public class ChooseOne extends AppCompatActivity {
             }
         });
 
-        DeliveryPerson.setOnClickListener(new View.OnClickListener() {
+        LogisticsPerson.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
                 if (type.equals("SignUp")) {
-                    Intent Registerdelivery = new Intent(ChooseOne.this, Delivery_registeration.class);
+                    Intent Registerdelivery = new Intent(ChooseOne.this, Logistics_registration.class);
                     startActivity(Registerdelivery);
                 }
                 if (type.equals("Phone")) {
-                    Intent loginphone = new Intent(ChooseOne.this, Delivery_LoginPhone.class);
+                    Intent loginphone = new Intent(ChooseOne.this, Logistics_LoginPhone.class);
                     startActivity(loginphone);
                     finish();
                 }
                 if (type.equals("Email")) {
-                    Intent loginemail = new Intent(ChooseOne.this, Delivery_Login.class);
+                    Intent loginemail = new Intent(ChooseOne.this, Logistics_Login.class);
                     startActivity(loginemail);
                     finish();
                 }
