@@ -1,6 +1,7 @@
 package com.AgriBuhayProj.app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -25,6 +26,11 @@ public class Producerloginphone extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_producerloginphone);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Login As Producer");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         num=(EditText)findViewById(R.id.number);
         sendotp=(Button)findViewById(R.id.otp);

@@ -1,6 +1,7 @@
 package com.AgriBuhayProj.app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -26,6 +27,11 @@ public class Logistics_LoginPhone extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_logistics__login_phone);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Login As Logistics");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         num = (EditText) findViewById(R.id.Dphonenumber);
         sendotp = (Button) findViewById(R.id.Sendotp);

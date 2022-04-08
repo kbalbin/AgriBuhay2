@@ -13,7 +13,6 @@ public class ChooseOne extends AppCompatActivity {
     Button Producer, Retailer, LogisticsPerson;
     Intent intent;
     String type;
-    ConstraintLayout bgimage;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

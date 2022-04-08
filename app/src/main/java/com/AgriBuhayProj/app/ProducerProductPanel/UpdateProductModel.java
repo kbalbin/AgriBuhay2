@@ -2,12 +2,27 @@ package com.AgriBuhayProj.app.ProducerProductPanel;
 
 public class UpdateProductModel {
 
-    String Products,RandomUID,Description,Quantity,Price,ImageURL, ProducerId;
+    String Products,RandomUID,Description,Quantity,Price,ImageURL, ProducerId, Mobile;
 
 
-    public UpdateProductModel()
-    {
+    public UpdateProductModel() {
 
+    }
+
+    public String getProducts() {
+        return Products;
+    }
+
+    public void setProducts(String products) {
+        Products = products;
+    }
+
+    public String getRandomUID() {
+        return RandomUID;
+    }
+
+    public void setRandomUID(String randomUID) {
+        RandomUID = randomUID;
     }
 
     public String getDescription() {
@@ -26,14 +41,6 @@ public class UpdateProductModel {
         Quantity = quantity;
     }
 
-    public String getImageURL() {
-        return ImageURL;
-    }
-
-    public void setImageURL(String imageURL) {
-        ImageURL = imageURL;
-    }
-
     public String getPrice() {
         return Price;
     }
@@ -42,24 +49,12 @@ public class UpdateProductModel {
         Price = price;
     }
 
-    public String getRandomUID() {
-
-        return RandomUID;
+    public String getImageURL() {
+        return ImageURL;
     }
 
-    public void setRandomUID(String randomUID) {
-
-        RandomUID = randomUID;
-    }
-
-    public String getProducts()
-    {
-        return Products;
-    }
-
-    public void setProducts(String products) {
-
-        Products = products;
+    public void setImageURL(String imageURL) {
+        ImageURL = imageURL;
     }
 
     public String getProducerId() {
@@ -68,5 +63,13 @@ public class UpdateProductModel {
 
     public void setProducerId(String producerId) {
         ProducerId = producerId;
+    }
+
+    public String getMobile() {
+        return Mobile;
+    }
+
+    public void setMobile(String mobile) {
+        Mobile = mobile;
     }
 }

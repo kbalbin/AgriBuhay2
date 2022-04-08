@@ -1,6 +1,7 @@
 package com.AgriBuhayProj.app;
 
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.appcompat.widget.Toolbar;
 
 import android.content.Intent;
 import android.os.Bundle;
@@ -27,6 +28,11 @@ public class LoginPhone extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_login_phone);
+
+        Toolbar toolbar = findViewById(R.id.toolbar);
+        setSupportActionBar(toolbar);
+        getSupportActionBar().setTitle("Login As Retailer");
+        getSupportActionBar().setDisplayHomeAsUpEnabled(true);
 
         num=(EditText)findViewById(R.id.number);
         sendotp=(Button)findViewById(R.id.otp);

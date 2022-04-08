@@ -48,6 +48,7 @@ public class RetailerHomeAdapter extends RecyclerView.Adapter<RetailerHomeAdapte
         holder.Productname.setText(updateProductModel.getProducts());
         updateProductModel.getRandomUID();
         updateProductModel.getProducerId();
+        updateProductModel.getMobile();
         holder.price.setText("Price: ₱ " + updateProductModel.getPrice());
         holder.itemView.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -56,6 +57,7 @@ public class RetailerHomeAdapter extends RecyclerView.Adapter<RetailerHomeAdapte
                 Intent intent=new Intent(mcontext, OrderProduct.class);
                 intent.putExtra("ProductMenu", updateProductModel.getRandomUID());
                 intent.putExtra("ProducerId", updateProductModel.getProducerId());
+                intent.putExtra("ProductPhoneNum", updateProductModel.getMobile());
 
 
                 mcontext.startActivity(intent);

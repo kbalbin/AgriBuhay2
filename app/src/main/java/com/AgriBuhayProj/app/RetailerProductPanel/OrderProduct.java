@@ -3,12 +3,18 @@ package com.AgriBuhayProj.app.RetailerProductPanel;
 import androidx.annotation.NonNull;
 import androidx.appcompat.app.AlertDialog;
 import androidx.appcompat.app.AppCompatActivity;
+import androidx.core.app.ActivityCompat;
+import androidx.core.content.ContextCompat;
 
+import android.Manifest;
 import android.content.DialogInterface;
 import android.content.Intent;
+import android.content.pm.PackageManager;
 import android.os.Bundle;
+import android.telephony.SmsManager;
 import android.text.Html;
 import android.view.View;
+import android.widget.Button;
 import android.widget.ImageView;
 import android.widget.TextView;
 import android.widget.Toast;
@@ -34,10 +40,11 @@ import java.util.HashMap;
 public class OrderProduct extends AppCompatActivity {
 
 
-    String RandomId, ProducerID;
+    String RandomId, ProducerID, ProducerMobileNum;
     ImageView imageView;
     ElegantNumberButton additem;
     TextView Productname, ProducerName, ProducerLoaction, ProductQuantity, ProductPrice, ProductDescription;
+    Button textMessage;
     DatabaseReference databaseReference, dataaa, producerdata, reference, data, dataref;
     String State, City, Sub, productname;
     int productprice;
@@ -58,6 +65,7 @@ public class OrderProduct extends AppCompatActivity {
         ProductDescription = (TextView) findViewById(R.id.product_description);
         imageView = (ImageView) findViewById(R.id.image);
         additem = (ElegantNumberButton) findViewById(R.id.number_btn);
+        textMessage = (Button) findViewById(R.id.sendText);
 
         final String userid = FirebaseAuth.getInstance().getCurrentUser().getUid();
         dataaa = FirebaseDatabase.getInstance().getReference("Retailer").child(userid);
@@ -71,6 +79,7 @@ public class OrderProduct extends AppCompatActivity {
 
                 RandomId = getIntent().getStringExtra("ProductMenu");
                 ProducerID = getIntent().getStringExtra("ProducerId");
+                ProducerMobileNum = getIntent().getStringExtra("ProducerPhoneNum");
 
                 databaseReference = FirebaseDatabase.getInstance().getReference("ProductSupplyDetails").child(State).child(City).child(Sub).child(ProducerID).child(RandomId);
                 databaseReference.addListenerForSingleValueEvent(new ValueEventListener() {
@@ -167,6 +176,7 @@ public class OrderProduct extends AppCompatActivity {
                                                     hashMap.put("Price", String.valueOf(productprice));
                                                     hashMap.put("Totalprice", String.valueOf(totalprice));
                                                     hashMap.put("ProducerId", ProducerID);
+                                                    hashMap.put("ProducerPhone", ProducerMobileNum);
                                                     custID = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                                     reference = FirebaseDatabase.getInstance().getReference("Cart").child("CartItems").child(custID).child(RandomId);
                                                     reference.setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -226,6 +236,7 @@ public class OrderProduct extends AppCompatActivity {
                                                 hashMap.put("Price", String.valueOf(productprice));
                                                 hashMap.put("Totalprice", String.valueOf(totalprice));
                                                 hashMap.put("ProducerId", ProducerID);
+                                                hashMap.put("ProducerPhone", ProducerMobileNum);
                                                 custID = FirebaseAuth.getInstance().getCurrentUser().getUid();
                                                 reference = FirebaseDatabase.getInstance().getReference("Cart").child("CartItems").child(custID).child(RandomId);
                                                 reference.setValue(hashMap).addOnSuccessListener(new OnSuccessListener<Void>() {
@@ -264,5 +275,25 @@ public class OrderProduct extends AppCompatActivity {
 
             }
         });
+        textMessage.setOnClickListener(new View.OnClickListener() {
+            @Override
+            public void onClick(View view) {
+                if(ContextCompat.checkSelfPermission(getApplicationContext(), Manifest.permission.SEND_SMS) ==
+                        PackageManager.PERMISSION_GRANTED){
+                    sendSMS();
+                }else{
+                    ActivityCompat.requestPermissions(OrderProduct.this, new String[]{Manifest.permission.SEND_SMS}, 100);
+                }
+            }
+        });
+    }
+    private void sendSMS() {
+        try{
+            SmsManager smgr = SmsManager.getDefault();
+            smgr.sendTextMessage(ProducerMobileNum, null, "A customer has sent you an order please check your application", null,null);
+            Toast.makeText(getApplicationContext(), "The message sent successfully", Toast.LENGTH_SHORT).show();
+        }catch(Exception ex){
+            Toast.makeText(getApplicationContext(), "SMS Failed to send. Please try again", Toast.LENGTH_SHORT).show();
+        }
     }
 }

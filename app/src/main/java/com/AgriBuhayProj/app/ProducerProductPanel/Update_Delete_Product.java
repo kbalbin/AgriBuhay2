@@ -67,7 +67,7 @@ public class Update_Delete_Product extends AppCompatActivity {
     private ProgressDialog progressDialog;
     DatabaseReference dataaa;
     String State, City, Sub;
-
+    String Mobile;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -273,7 +273,7 @@ public class Update_Delete_Product extends AppCompatActivity {
 
     private void updatedesc(String uri) {
         ProducerId = FirebaseAuth.getInstance().getCurrentUser().getUid();
-        ProductSupplyDetails info = new ProductSupplyDetails(products, quantity, price, description, uri, ID, ProducerId);
+        ProductSupplyDetails info = new ProductSupplyDetails(products, quantity, price, description, uri, ID, ProducerId, Mobile);
         firebaseDatabase.getInstance().getReference("ProductSupplyDetails").child(State).child(City).child(Sub)
                 .child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(ID)
                 .setValue(info).addOnCompleteListener(new OnCompleteListener<Void>() {

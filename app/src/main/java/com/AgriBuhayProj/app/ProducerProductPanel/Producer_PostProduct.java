@@ -48,8 +48,8 @@ public class Producer_PostProduct extends AppCompatActivity {
     ImageButton imageButton;
     Button post_product;
     Spinner Products;
-    TextInputLayout desc, qty, pri;
-    String description, quantity, price, products;
+    TextInputLayout desc, qty, pri, num;
+    String description, quantity, price, products, mobile;
     Uri imageuri;
     private Uri mCropimageuri;
     FirebaseStorage storage;
@@ -75,7 +75,9 @@ public class Producer_PostProduct extends AppCompatActivity {
         qty = (TextInputLayout) findViewById(R.id.quantity);
         pri = (TextInputLayout) findViewById(R.id.price);
         post_product = (Button) findViewById(R.id.post);
+        num = (TextInputLayout) findViewById(R.id.mobile);
         FAuth = FirebaseAuth.getInstance();
+        //TODO add the mobile num
         //TODO this is the database for the FoodSupplyDetails
         databaseReference = firebaseDatabase.getInstance().getReference("ProductSupplyDetails");
 
@@ -106,6 +108,8 @@ public class Producer_PostProduct extends AppCompatActivity {
                             description = desc.getEditText().getText().toString().trim();
                             quantity = qty.getEditText().getText().toString().trim();
                             price = pri.getEditText().getText().toString().trim();
+                            mobile = num.getEditText().getText().toString().trim();
+
 
                             if (isValid()) {
                                 uploadImage();
@@ -177,7 +181,7 @@ public class Producer_PostProduct extends AppCompatActivity {
                     ref.getDownloadUrl().addOnSuccessListener(new OnSuccessListener<Uri>() {
                         @Override
                         public void onSuccess(Uri uri) {
-                            ProductSupplyDetails info = new ProductSupplyDetails(products, quantity, price, description, String.valueOf(uri), RandomUId, ProducerId);
+                            ProductSupplyDetails info = new ProductSupplyDetails(products, quantity, price, description, String.valueOf(uri), RandomUId, ProducerId, mobile);
                             //TODO this is the database for the FoodSupplyDetails
                             firebaseDatabase.getInstance().getReference("ProductSupplyDetails").child(State).child(City).child(sub).child(FirebaseAuth.getInstance().getCurrentUser().getUid()).child(RandomUId)
                                     .setValue(info).addOnCompleteListener(new OnCompleteListener<Void>() {
