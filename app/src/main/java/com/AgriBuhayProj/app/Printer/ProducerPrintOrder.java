@@ -14,7 +14,17 @@ import android.view.View;
 import android.widget.Button;
 import android.widget.Toast;
 
+import androidx.annotation.NonNull;
+
+import com.AgriBuhayProj.app.Producer;
+import com.AgriBuhayProj.app.ProducerProductPanel.ProducerFinalOrders;
+import com.AgriBuhayProj.app.ProducerProductPanel.ProducerFinalOrders1;
 import com.AgriBuhayProj.app.R;
+import com.google.firebase.database.DataSnapshot;
+import com.google.firebase.database.DatabaseError;
+import com.google.firebase.database.DatabaseReference;
+import com.google.firebase.database.FirebaseDatabase;
+import com.google.firebase.database.ValueEventListener;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -34,6 +44,9 @@ public class ProducerPrintOrder extends Activity implements Runnable {
     private ProgressDialog mBluetoothConnectProgressDialog;
     private BluetoothSocket mBluetoothSocket;
     BluetoothDevice mBluetoothDevice;
+    private String producerID = "tFHeG3JY4DbOld2kNqISYw3C4ZJ3";
+    private String randomId = "1fbf53c1-d360-4760-9d25-17d063ddbeb0";
+    private String randomId1 = "f711dfc3-a0ef-4e07-b53c-c1504e852780";
 
     @Override
     public void onCreate(Bundle mSavedInstanceState) {
@@ -52,7 +65,7 @@ public class ProducerPrintOrder extends Activity implements Runnable {
                     } else {
                         ListPairedDevices();
                         Intent connectIntent = new Intent(ProducerPrintOrder.this,
-                                com.AgriBuhayProj.app.Printer.DeviceListActivity.class);
+                                DeviceListActivity.class);
                         startActivityForResult(connectIntent,
                                 REQUEST_CONNECT_DEVICE);
                     }
@@ -63,67 +76,8 @@ public class ProducerPrintOrder extends Activity implements Runnable {
         mPrint = (Button) findViewById(R.id.mPrint);
         mPrint.setOnClickListener(new View.OnClickListener() {
             public void onClick(View mView) {
-                Thread t = new Thread() {
-                    public void run() {
-                        try {
-                            OutputStream os = mBluetoothSocket
-                                    .getOutputStream();
-                            String BILL = "";
-
-                            BILL = "                   XXXX MART    \n"
-                                    + "                   XX.AA.BB.CC.     \n " +
-                                    "                 NO 25 ABC ABCDE    \n" +
-                                    "                  XXXXX YYYYYY      \n" +
-                                    "                   MMM 590019091      \n";
-                            BILL = BILL
-                                    + "-----------------------------------------------\n";
-
-
-                            BILL = BILL + String.format("%1$-10s %2$10s %3$13s %4$10s", "Item", "Qty", "Rate", "Totel");
-                            BILL = BILL + "\n";
-                            BILL = BILL
-                                    + "-----------------------------------------------";
-                            BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-001", "5", "10", "50.00");
-                            BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-002", "10", "5", "50.00");
-                            BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-003", "20", "10", "200.00");
-                            BILL = BILL + "\n " + String.format("%1$-10s %2$10s %3$11s %4$10s", "item-004", "50", "10", "500.00");
-
-                            BILL = BILL
-                                    + "\n-----------------------------------------------";
-                            BILL = BILL + "\n\n ";
-
-                            BILL = BILL + "                   Total Qty:" + "      " + "85" + "\n";
-                            BILL = BILL + "                   Total Value:" + "     " + "700.00" + "\n";
-
-                            BILL = BILL
-                                    + "-----------------------------------------------\n";
-                            BILL = BILL + "\n\n ";
-                            os.write(BILL.getBytes());
-                            //This is printer specific code you can comment ==== > Start
-
-                            // Setting height
-                            int gs = 29;
-                            os.write(intToByteArray(gs));
-                            int h = 104;
-                            os.write(intToByteArray(h));
-                            int n = 162;
-                            os.write(intToByteArray(n));
-
-                            // Setting Width
-                            int gs_width = 29;
-                            os.write(intToByteArray(gs_width));
-                            int w = 119;
-                            os.write(intToByteArray(w));
-                            int n_width = 2;
-                            os.write(intToByteArray(n_width));
-
-
-                        } catch (Exception e) {
-                            Log.e("ProducerPrintOrder", "Exe ", e);
-                        }
-                    }
-                };
-                t.start();
+                p1();
+                p2();
             }
         });
 
@@ -187,7 +141,7 @@ public class ProducerPrintOrder extends Activity implements Runnable {
                 if (mResultCode == Activity.RESULT_OK) {
                     ListPairedDevices();
                     Intent connectIntent = new Intent(ProducerPrintOrder.this,
-                            com.AgriBuhayProj.app.Printer.DeviceListActivity.class);
+                            DeviceListActivity.class);
                     startActivityForResult(connectIntent, REQUEST_CONNECT_DEVICE);
                 } else {
                     Toast.makeText(ProducerPrintOrder.this, "Message", Toast.LENGTH_SHORT).show();
@@ -240,7 +194,7 @@ public class ProducerPrintOrder extends Activity implements Runnable {
 
         for (int k = 0; k < b.length; k++) {
             System.out.println("Selva  [" + k + "] = " + "0x"
-                    + com.AgriBuhayProj.app.Printer.UnicodeFormatter.byteToHex(b[k]));
+                    + UnicodeFormatter.byteToHex(b[k]));
         }
 
         return b[3];
@@ -253,4 +207,154 @@ public class ProducerPrintOrder extends Activity implements Runnable {
         return buffer.array();
     }
 
+    public void p1() {
+        Thread t = new Thread() {
+            public void run() {
+                try {
+                    DatabaseReference data = FirebaseDatabase.getInstance().getReference("Chef").child(producerID);
+                    data.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            final Producer producer = snapshot.getValue(Producer.class);
+                            String producerName = producer.getFname() + " " + producer.getLname();
+                            String province = producer.getState();
+                            String address = producer.getCity() + " " + producer.getSuburban();
+                            String num = "+63" + producer.getMobile();
+                            try {
+                                OutputStream os = mBluetoothSocket
+                                        .getOutputStream();
+                                String BILL = "";
+                                BILL = BILL
+                                        + "================================\n";
+
+
+                                BILL = BILL + String.format("%1$-10s %2$10s", "Producer name: ", producerName);
+                                BILL = BILL + "\n";
+                                BILL = BILL + String.format("%1$-10s %2$10s", "Province: ", province);
+                                BILL = BILL + "\n";
+                                BILL = BILL + String.format("%1$-10s %2$10s", "Address: ", address);
+                                BILL = BILL + "\n";
+                                BILL = BILL + String.format("%1$-10s %2$10s", "MobileNo.: ", num);
+                                BILL = BILL + "\n";
+                                os.write(BILL.getBytes());
+                                //This is printer specific code you can comment ==== > Start
+
+                                // Setting height
+                                int gs = 29;
+                                os.write(intToByteArray(gs));
+                                int h = 104;
+                                os.write(intToByteArray(h));
+                                int n = 162;
+                                os.write(intToByteArray(n));
+
+                                // Setting Width
+                                int gs_width = 29;
+                                os.write(intToByteArray(gs_width));
+                                int w = 119;
+                                os.write(intToByteArray(w));
+                                int n_width = 2;
+                                os.write(intToByteArray(n_width));
+
+                            } catch (Exception e) {
+                                Log.e("MainActivity", "Exe ", e);
+                            }
+
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                } catch (Exception e) {
+                    Log.e("MainActivity", "Exe ", e);
+                }
+            }
+        };
+        t.start();
+    }
+
+    public void p2() {
+        Thread t = new Thread() {
+            public void run() {
+                try {
+                    DatabaseReference dataa = FirebaseDatabase.getInstance().getReference("ChefFinalOrders").child(producerID).child(randomId).child("OtherInformation");
+                    dataa.addListenerForSingleValueEvent(new ValueEventListener() {
+                        @Override
+                        public void onDataChange(@NonNull DataSnapshot snapshot) {
+                            final ProducerFinalOrders1 producerFinalOrders1 = snapshot.getValue(ProducerFinalOrders1.class);
+                            String retailerName = producerFinalOrders1.getName();
+                            String retailerAds = producerFinalOrders1.getAddress();
+                            DatabaseReference dataaa = FirebaseDatabase.getInstance().getReference("ChefFinalOrders").child(producerID).child(randomId).child("Dishes").child(randomId1);
+                            dataaa.addListenerForSingleValueEvent(new ValueEventListener() {
+                                @Override
+                                public void onDataChange(@NonNull DataSnapshot snapshot) {
+                                    final ProducerFinalOrders producerFinalOrders = snapshot.getValue(ProducerFinalOrders.class);
+                                    String productName = producerFinalOrders.getProductName();
+                                    String price = producerFinalOrders.getProductQuantity() + "kg " + producerFinalOrders.getProductPrice();
+                                    String totalPrice = producerFinalOrders.getTotalPrice();
+                                    try {
+                                        OutputStream os = mBluetoothSocket
+                                                .getOutputStream();
+                                        String BILL = "";
+                                        BILL = BILL
+                                                + "================================\n";
+
+                                        BILL = BILL + String.format("%1$-10s %2$10s", "Retailer name: ", retailerName);
+                                        BILL = BILL + "\n";
+                                        BILL = BILL + String.format("%1$-10s %2$10s", "Retailer Address: ", retailerAds);
+                                        BILL = BILL + "\n";
+                                        BILL = BILL + String.format("%1$-10s %2$10s", "Product name: ", productName);
+                                        BILL = BILL + "\n";
+                                        BILL = BILL + String.format("%1$-10s %2$10s", "Price/kg: ", price);
+                                        BILL = BILL + "\n";
+                                        BILL = BILL + String.format("%1$-10s %2$10s", "GrandTotal: ", totalPrice);
+                                        BILL = BILL + "\n";
+                                        BILL = BILL
+                                                + "================================\n";
+                                        BILL = BILL + "\n\n ";
+                                        os.write(BILL.getBytes());
+                                        //This is printer specific code you can comment ==== > Start
+
+                                        // Setting height
+                                        int gs = 29;
+                                        os.write(intToByteArray(gs));
+                                        int h = 104;
+                                        os.write(intToByteArray(h));
+                                        int n = 162;
+                                        os.write(intToByteArray(n));
+
+                                        // Setting Width
+                                        int gs_width = 29;
+                                        os.write(intToByteArray(gs_width));
+                                        int w = 119;
+                                        os.write(intToByteArray(w));
+                                        int n_width = 2;
+                                        os.write(intToByteArray(n_width));
+
+                                    } catch (Exception e) {
+                                        Log.e("MainActivity", "Exe ", e);
+                                    }
+
+                                }
+
+                                @Override
+                                public void onCancelled(@NonNull DatabaseError error) {
+
+                                }
+                            });
+                        }
+
+                        @Override
+                        public void onCancelled(@NonNull DatabaseError error) {
+
+                        }
+                    });
+                } catch (Exception e) {
+                    Log.e("MainActivity", "Exe ", e);
+                }
+            }
+        };
+        t.start();
+    }
 }
