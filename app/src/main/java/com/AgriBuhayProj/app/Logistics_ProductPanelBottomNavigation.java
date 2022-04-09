@@ -78,17 +78,6 @@ public class Logistics_ProductPanelBottomNavigation extends AppCompatActivity im
 
     //DISABLE BACK PRESS
     public void onBackPressed(){
-        if(backPress){
-            super.onBackPressed();
-        }
-        Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show();
-        backPress = true;
 
-        new Handler().postDelayed(new Runnable() {
-            @Override
-            public void run() {
-                backPress = false;
-            }
-        },2000);
     }
 }

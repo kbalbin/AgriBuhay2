@@ -24,42 +24,32 @@ public class MainMenu extends AppCompatActivity {
     protected void onCreate(Bundle savedInstanceState) {
         super.onCreate(savedInstanceState);
         setContentView(R.layout.activity_main_menu);
-        signinemail = (Button) findViewById(R.id.SignwithEmail);
-        signinphone = (Button) findViewById(R.id.SignwithPhone);
-        signup = (Button) findViewById(R.id.SignUp);
+        signinemail = findViewById(R.id.SignwithEmail);
+        signinphone = findViewById(R.id.SignwithPhone);
+        signup = findViewById(R.id.SignUp);
 
+        //BUTTON EVENTS
+        //login by email
         signinemail.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-
-                Intent signemail = new Intent(MainMenu.this, ChooseOne.class);
-                signemail.putExtra("Home", "Email");
-                startActivity(signemail);
-                finish();
+                startActivity(new Intent(MainMenu.this, ChooseOne.class).putExtra("Home", "Email"));
             }
         });
-
+        //login by phone
         signinphone.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent signphone = new Intent(MainMenu.this, ChooseOne.class);
-                signphone.putExtra("Home", "Phone");
-                startActivity(signphone);
-                finish();
+                startActivity(new Intent(MainMenu.this, ChooseOne.class).putExtra("Home", "Phone"));
             }
         });
-
+        //register account
         signup.setOnClickListener(new View.OnClickListener() {
             @Override
             public void onClick(View v) {
-                Intent signup = new Intent(MainMenu.this, ChooseOne.class);
-                signup.putExtra("Home", "SignUp");
-                startActivity(signup);
-                finish();
+                startActivity(new Intent(MainMenu.this, ChooseOne.class).putExtra("Home", "Register"));
             }
         });
-
-
     }
     @Override
     protected void onDestroy() {
@@ -67,7 +57,7 @@ public class MainMenu extends AppCompatActivity {
         System.gc();
     }
 
-    //DISABLE BACK PRESS
+    //EXIT APP
     public void onBackPressed(){
         if(backPress){
             super.onBackPressed();
@@ -80,6 +70,6 @@ public class MainMenu extends AppCompatActivity {
             public void run() {
                 backPress = false;
             }
-        },2000);
+        },5000);
     }
 }

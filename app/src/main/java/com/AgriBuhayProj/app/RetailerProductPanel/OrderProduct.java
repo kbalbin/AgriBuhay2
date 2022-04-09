@@ -101,6 +101,7 @@ public class OrderProduct extends AppCompatActivity {
                             public void onDataChange(@NonNull DataSnapshot dataSnapshot) {
                                 Producer producer = dataSnapshot.getValue(Producer.class);
 
+                                //TODO: check getFname
                                 String name = "<b>" + "Producer Name: " + "</b>" + producer.getFname() + " " + producer.getLname();
                                 ProducerName.setText(Html.fromHtml(name));
                                 String loc = "<b>" + "Location: " + "</b>" + producer.getSuburban();
