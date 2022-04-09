@@ -108,7 +108,7 @@ public class RetailerCartFragment extends Fragment {
                         public void onClick(View v) {
 
                             AlertDialog.Builder builder = new AlertDialog.Builder(getActivity());
-                            builder.setMessage("Are you sure you want to remove the Product");
+                            builder.setMessage("Are you sure you want to remove the Product?");
                             builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                                 @Override
                                 public void onClick(DialogInterface dialog, int which) {

@@ -17,6 +17,7 @@ import android.widget.Spinner;
 import android.widget.TextView;
 import android.widget.Toast;
 
+import com.AgriBuhayProj.app.Printer.ProducerPrintOrder;
 import com.AgriBuhayProj.app.Producer;
 
 import com.AgriBuhayProj.app.R;
@@ -241,12 +242,12 @@ public class ProducerPreparedOrderView extends AppCompatActivity {
 
                         }
                     });
-//                    printOrder.setOnClickListener(new View.OnClickListener() {
-//                        @Override
-//                        public void onClick(View view) {
-//                            startActivity(new Intent(ChefPreparedOrderView.this, ProducerPrintOrder.class));
-//                        }
-//                    });
+                    printOrder.setOnClickListener(new View.OnClickListener() {
+                        @Override
+                        public void onClick(View view) {
+                            startActivity(new Intent(ProducerPreparedOrderView.this, ProducerPrintOrder.class));
+                        }
+                    });
 
                 }
                 adapter = new ProducerPreparedOrderViewAdapter(ProducerPreparedOrderView.this, producerFinalOrdersList);

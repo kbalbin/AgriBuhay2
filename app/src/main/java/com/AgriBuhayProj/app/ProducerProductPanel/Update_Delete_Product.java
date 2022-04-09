@@ -117,7 +117,7 @@ public class Update_Delete_Product extends AppCompatActivity {
 
 
                         AlertDialog.Builder builder = new AlertDialog.Builder(Update_Delete_Product.this);
-                        builder.setMessage("Are you sure you want to Delete Product");
+                        builder.setMessage("Are you sure you want to Delete the Product?");
                         builder.setPositiveButton("YES", new DialogInterface.OnClickListener() {
                             @Override
                             public void onClick(DialogInterface dialog, int which) {

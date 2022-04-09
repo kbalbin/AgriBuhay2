@@ -112,18 +112,21 @@
         <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/activity_producer__post_product.xml" value="0.2" />
         <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/activity_producer_forgot_password.xml" value="0.1456752655538695" />
         <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/activity_producer_login.xml" value="0.1456752655538695" />
+        <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/activity_producer_prepared_order_view.xml" value="0.1456752655538695" />
         <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/activity_producer_product_panel__bottom_navigation.xml" value="0.1456752655538695" />
         <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/activity_producer_registeration.xml" value="0.1456752655538695" />
         <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/activity_producer_verify_phone.xml" value="0.1456752655538695" />
         <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/activity_producerloginphone.xml" value="0.1456752655538695" />
         <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/activity_producersendotp.xml" value="0.1456752655538695" />
         <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/activity_registeration.xml" value="0.1456752655538695" />
+        <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/activity_retailer_online_payment.xml" value="0.22" />
         <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/activity_retailer_payment.xml" value="0.1456752655538695" />
         <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/activity_retailer_payment_otp.xml" value="0.1456752655538695" />
         <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/activity_retailer_phone_send_otp.xml" value="0.1456752655538695" />
         <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/activity_retailer_phonenumber.xml" value="0.1456752655538695" />
         <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/activity_sendotp.xml" value="0.1456752655538695" />
         <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/activity_verify_phone.xml" value="0.1456752655538695" />
+        <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/fragment_producer_order.xml" value="0.67" />
         <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/fragment_producer_profile.xml" value="0.1456752655538695" />
         <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/main_printer.xml" value="0.1456752655538695" />
         <entry key="..\:/Users/Ismael/AndroidStudioProjects/AgriBuhay2/app/src/main/res/layout/producer_preparedorder.xml" value="0.1456752655538695" />

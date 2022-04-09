@@ -20,11 +20,14 @@ import com.AgriBuhayProj.app.Producer;
 import com.AgriBuhayProj.app.ProducerProductPanel.ProducerFinalOrders;
 import com.AgriBuhayProj.app.ProducerProductPanel.ProducerFinalOrders1;
 import com.AgriBuhayProj.app.R;
+import com.google.android.material.textfield.TextInputLayout;
 import com.google.firebase.database.DataSnapshot;
 import com.google.firebase.database.DatabaseError;
 import com.google.firebase.database.DatabaseReference;
 import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.database.ValueEventListener;
+
+import org.w3c.dom.Text;
 
 import java.io.IOException;
 import java.io.OutputStream;
@@ -47,10 +50,14 @@ public class ProducerPrintOrder extends Activity implements Runnable {
     private String producerID = "tFHeG3JY4DbOld2kNqISYw3C4ZJ3";
     private String randomId = "1fbf53c1-d360-4760-9d25-17d063ddbeb0";
     private String randomId1 = "f711dfc3-a0ef-4e07-b53c-c1504e852780";
+    private TextInputLayout kilo, co2, temp, humidity;
+    private String quantityKilo;
 
     @Override
     public void onCreate(Bundle mSavedInstanceState) {
         super.onCreate(mSavedInstanceState);
+
+        kilo = (TextInputLayout) findViewById(R.id.edtNetWt);
         setContentView(R.layout.main_printer);
         mScan = (Button) findViewById(R.id.Scan);
         mScan.setOnClickListener(new View.OnClickListener() {
@@ -76,8 +83,10 @@ public class ProducerPrintOrder extends Activity implements Runnable {
         mPrint = (Button) findViewById(R.id.mPrint);
         mPrint.setOnClickListener(new View.OnClickListener() {
             public void onClick(View mView) {
+                quantityKilo = kilo.getEditText().getText().toString().trim();
                 p1();
                 p2();
+                p3();
             }
         });
 
@@ -350,6 +359,47 @@ public class ProducerPrintOrder extends Activity implements Runnable {
 
                         }
                     });
+                } catch (Exception e) {
+                    Log.e("MainActivity", "Exe ", e);
+                }
+            }
+        };
+        t.start();
+    }
+    public void p3(){
+        Thread t = new Thread() {
+            public void run() {
+                try {
+                    OutputStream os = mBluetoothSocket
+                            .getOutputStream();
+                    String BILL = "";
+                    BILL = BILL
+                            + "================================\n";
+
+                    BILL = BILL + String.format("%1$-10s %2$10s", "Net weight product: ", quantityKilo);
+                    BILL = BILL + "\n";
+                    BILL = BILL
+                            + "================================\n";
+                    BILL = BILL + "\n\n ";
+                    os.write(BILL.getBytes());
+                    //This is printer specific code you can comment ==== > Start
+
+                    // Setting height
+                    int gs = 29;
+                    os.write(intToByteArray(gs));
+                    int h = 104;
+                    os.write(intToByteArray(h));
+                    int n = 162;
+                    os.write(intToByteArray(n));
+
+                    // Setting Width
+                    int gs_width = 29;
+                    os.write(intToByteArray(gs_width));
+                    int w = 119;
+                    os.write(intToByteArray(w));
+                    int n_width = 2;
+                    os.write(intToByteArray(n_width));
+
                 } catch (Exception e) {
                     Log.e("MainActivity", "Exe ", e);
                 }
