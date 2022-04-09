@@ -4,11 +4,13 @@ import androidx.appcompat.app.AppCompatActivity;
 
 import android.content.Intent;
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.View;
 import android.view.animation.Animation;
 import android.view.animation.AnimationUtils;
 import android.widget.Button;
 import android.widget.ImageView;
+import android.widget.Toast;
 
 import com.AgriBuhayProj.app.R;
 public class MainMenu extends AppCompatActivity {
@@ -16,6 +18,7 @@ public class MainMenu extends AppCompatActivity {
     Button signinemail, signinphone, signup;
     ImageView bgimage;
 
+    private Boolean backPress = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -62,5 +65,21 @@ public class MainMenu extends AppCompatActivity {
     protected void onDestroy() {
         super.onDestroy();
         System.gc();
+    }
+
+    //DISABLE BACK PRESS
+    public void onBackPressed(){
+        if(backPress){
+            super.onBackPressed();
+        }
+        Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show();
+        backPress = true;
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                backPress = false;
+            }
+        },2000);
     }
 }

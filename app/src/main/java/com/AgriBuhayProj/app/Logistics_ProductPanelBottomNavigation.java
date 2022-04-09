@@ -5,7 +5,9 @@ import androidx.appcompat.app.AppCompatActivity;
 import androidx.fragment.app.Fragment;
 
 import android.os.Bundle;
+import android.os.Handler;
 import android.view.MenuItem;
+import android.widget.Toast;
 
 import com.AgriBuhayProj.app.LogisticsProductPanel.LogisticsPendingOrderFragment;
 import com.AgriBuhayProj.app.LogisticsProductPanel.LogisticsShipOrderFragment;
@@ -19,6 +21,7 @@ import com.google.firebase.database.FirebaseDatabase;
 import com.google.firebase.iid.FirebaseInstanceId;
 
 public class Logistics_ProductPanelBottomNavigation extends AppCompatActivity implements BottomNavigationView.OnNavigationItemSelectedListener {
+    private Boolean backPress = false;
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {
@@ -71,5 +74,21 @@ public class Logistics_ProductPanelBottomNavigation extends AppCompatActivity im
 
         }
         return loaddeliveryfragment(fragment);
+    }
+
+    //DISABLE BACK PRESS
+    public void onBackPressed(){
+        if(backPress){
+            super.onBackPressed();
+        }
+        Toast.makeText(this, "Press again to exit", Toast.LENGTH_SHORT).show();
+        backPress = true;
+
+        new Handler().postDelayed(new Runnable() {
+            @Override
+            public void run() {
+                backPress = false;
+            }
+        },2000);
     }
 }

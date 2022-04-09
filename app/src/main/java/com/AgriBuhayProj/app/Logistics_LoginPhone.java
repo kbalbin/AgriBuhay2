@@ -45,9 +45,9 @@ public class Logistics_LoginPhone extends AppCompatActivity {
             @Override
             public void onClick(View v) {
                 numberr = num.getText().toString().trim();
-                String phonenumber = cpp.getSelectedCountryCodeWithPlus() + numberr;
+                String phoneNumber = cpp.getSelectedCountryCodeWithPlus() + numberr;
                 Intent b = new Intent(Logistics_LoginPhone.this, Logistics_SendOtp.class);
-                b.putExtra("phonenumber", phonenumber);
+                b.putExtra("phoneNumber", phoneNumber);
                 startActivity(b);
                 finish();
 

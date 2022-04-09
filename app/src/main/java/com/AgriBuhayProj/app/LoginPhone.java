@@ -14,14 +14,16 @@ import com.AgriBuhayProj.app.R;
 import com.google.firebase.auth.FirebaseAuth;
 import com.hbb20.CountryCodePicker;
 
+//TODO: CHANGE NAME (LoginPhone - LoginPhoneRetailer same with other LoginPhone
 public class LoginPhone extends AppCompatActivity {
-
 
     EditText num;
     TextView txtsignup;
     Button sendotp,signinemail;
     CountryCodePicker cpp;
+
     FirebaseAuth FAuth;
+
     String numberr;
 
     @Override
@@ -47,9 +49,9 @@ public class LoginPhone extends AppCompatActivity {
             public void onClick(View v) {
 
                 numberr=num.getText().toString().trim();
-                String phonenumber= cpp.getSelectedCountryCodeWithPlus() + numberr;
+                String phoneNumber= cpp.getSelectedCountryCodeWithPlus() + numberr;
                 Intent b=new Intent(LoginPhone.this,sendotp.class);
-                b.putExtra("phonenumber",phonenumber);
+                b.putExtra("phoneNumber",phoneNumber);
                 startActivity(b);
                 finish();
 

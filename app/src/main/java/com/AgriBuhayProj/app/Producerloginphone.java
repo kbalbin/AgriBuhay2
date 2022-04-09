@@ -46,9 +46,9 @@ public class Producerloginphone extends AppCompatActivity {
             public void onClick(View v) {
 
                 numberr=num.getText().toString().trim();
-                String phonenumber= cpp.getSelectedCountryCodeWithPlus() + numberr;
+                String phoneNumber= cpp.getSelectedCountryCodeWithPlus() + numberr;
                 Intent b=new Intent(Producerloginphone.this, Producersendotp.class);
-                b.putExtra("phonenumber",phonenumber);
+                b.putExtra("phoneNumber",phoneNumber);
                 startActivity(b);
                 finish();
 
